@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Grocery Store </title>
+</head>
+<body>
+    {% if type_list %}
+    	<h2>List of Types - </h2>
+        <ol>
+            {% for type in type_list %}
+        <li> {{ type.name}} </li>
+        {% endfor %}
+        </ol>
+    {% else %}
+    	<strong> None of the types is available! </strong>
+    {% endif %} 
+    
+<a href="http://127.0.0.1:8000//about">About page</a>
+    
+</body>
+</html>

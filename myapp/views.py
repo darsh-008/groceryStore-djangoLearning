@@ -3,29 +3,24 @@ from django.http import HttpResponse
 from .models import *
 from datetime import *
 from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 
 # # Create your views here.
+def index(request):
+    type_list = Type.objects.all().order_by('id')[:10]
+    return render(request, 'myapp/index.html', {'type_list': type_list})
+
+
 # def index(request):
-#     type_list = Type.objects.all().order_by('id')
+#     item_list = item.objects.all().order_by('-price')[:10]
 #     response = HttpResponse()
 #     heading1 = '<p>' + 'Different Types: ' + '</p>'
 #     response.write(heading1)
-#     for type in type_list:
+#     for type in item_list:
 #         para ='<p>'+ str(type.id) + ': ' + str(type) + '</p>'
 #         response.write(para)
 #
 #     return response
-
-def index(request):
-    item_list = item.objects.all().order_by('-price')[:10]
-    response = HttpResponse()
-    heading1 = '<p>' + 'Different Types: ' + '</p>'
-    response.write(heading1)
-    for type in item_list:
-        para ='<p>'+ str(type.id) + ': ' + str(type) + '</p>'
-        response.write(para)
-
-    return response
 def about(request):
     response = HttpResponse()
     heading1 = '<p>' + 'This is an Online Grocery Store ' + '</p>'
