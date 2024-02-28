@@ -7,16 +7,18 @@
 <body>
     {% if type_list %}
     	<h2>List of Types - </h2>
-        <ol>
-            {% for type in type_list %}
-        <li> {{ type.name}} </li>
+        
+            {% for type in type_list%}
+            <a href="{% url 'myapp:detail' type.id %}">{{ type.name}} </a> <br>
         {% endfor %}
-        </ol>
+        
     {% else %}
-    	<strong> None of the types is available! </strong>
+    	<strong> None of the types is available! </strong> <br>
     {% endif %} 
-    
-<a href="http://127.0.0.1:8000//about">About page</a>
-    
+    <br>
+   {% block bl %}
+<a href="http://127.0.0.1:8000//about">About - Hardcoded URL</a> <br><br>
+<a href="{% url 'myapp:about' %}">About - Namespacing URL</a>
+{% endblock %}   
 </body>
 </html>

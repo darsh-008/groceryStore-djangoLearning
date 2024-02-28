@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Grocery Store </title>
+</head>
+<body>
+{% if type_no %}
+    <h1> Items for type : {{ type_no }}</h1>
+    {% for item in items %}
+    	<p>{{ item.name }} = {{ item.price }}</p>
+    {% endfor %}
+{% else %}
+    <h1>Not valid type number</h1>
+{% endif %}
+<a href="http://127.0.0.1:8000/index/">Index - Namespacing URL</a>
+</body>
+</html>
