@@ -20,7 +20,6 @@ def index(request):
     type_list = Type.objects.all().order_by('id')[:10]
     return render(request, 'myapp/index.html', {'type_list': type_list})
 
-
 # def index(request):
 #     item_list = item.objects.all().order_by('-price')[:10]
 #     response = HttpResponse()
@@ -31,6 +30,12 @@ def index(request):
 #         response.write(para)
 #
 #     return response
+# def orderStatus(request):
+#     status = OrderItem.objects.filter(status=1).get()
+#     status1 = OrderItem.objects.filter(status=2).get()
+#     return render(request, 'myapp/orderstatus.html', {'status': status, 'status1':status1})
+
+
 def about(request):
     return render(request, 'myapp/about.html')
 
@@ -75,3 +80,11 @@ def display(request):
     age =  18
     name = "darsh"
     return render(request, 'myapp/display.html', context={'age': age, 'name':name})
+
+
+def items(request):
+    itemlists = OrderItem.objects.all().order_by('id')[:20]
+    return render(request, 'myapp/items.html', context={'itemlists':itemlists})
+
+def placeorder(request):
+    return render(request, 'myapp/placeorder.html')

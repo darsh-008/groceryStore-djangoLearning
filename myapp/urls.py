@@ -10,5 +10,7 @@ urlpatterns = [
     path('sum/<int:type_no>/', views.sum, name='sum'),
     path('dateT/<int:year>/<int:month>/', views.dateT, name='dateT'),
     path('display/', views.display, name='display'),
+    path('items/', views.items, name='items'),
+    path('placeorder/', views.placeorder, name='placeorder'),
     ]
 

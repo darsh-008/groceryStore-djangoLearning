@@ -1,0 +1,22 @@
+{% extends 'myapp/base.html' %}
+{% block body_block %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Grocery Store </title>
+</head>
+<body>
+    {% if itemlists %}
+    	<h2>List of Items - </h2>
+        {% for etem in itemlists %}
+        <li>{{ etem.item }}</li>
+        {% endfor %}
+    {% else %}
+    	<strong> None of the types is available! </strong> <br>
+    {% endif %} 
+    <br>
+    <p><a href="{% url 'myapp:placeorder' %}">Place Order</a></p>
+</body>
+</html>
+{% endblock %}
