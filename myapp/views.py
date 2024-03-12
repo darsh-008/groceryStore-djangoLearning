@@ -4,6 +4,7 @@ from .models import *
 from datetime import *
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from myapp.forms import *
 # from myapp import urlpatterns
 from django.urls import include
 
@@ -37,7 +38,8 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'myapp/about.html')
+    clientlist = Client.objects.all()
+    return render(request, 'myapp/about.html', context={'clientlist':clientlist})
 
 def detail(request, type_no):
     selected_type = get_object_or_404(Type, pk=type_no)
@@ -87,4 +89,21 @@ def items(request):
     return render(request, 'myapp/items.html', context={'itemlists':itemlists})
 
 def placeorder(request):
-    return render(request, 'myapp/placeorder.html')
+    form = OrderItemForm()
+    return render(request, 'myapp/placeorder.html', context={'form':form})
+
+def itemsearch(request):
+    selected_item = None
+    price = None
+
+    if request.method == 'POST':
+        form = ItemSearchForm(request.POST)
+        if form.is_valid():
+            selected_item_id = form.cleaned_data['items']
+            selected_item = item.objects.get(pk=selected_item_id.id)
+            price = selected_item.price
+
+    else:
+        form = ItemSearchForm()
+
+    return render(request, 'myapp/itemsearch.html', {'form': form, 'selected_item': selected_item, 'price':price})

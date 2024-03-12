@@ -2,3 +2,15 @@
  			display: inline;
  			margin: 15px;
 			}
+
+.div{
+	background-color: blue;
+}
+
+body{
+	background-color: lightblue;
+}
+
+.li{
+	background-color: blue;
+}

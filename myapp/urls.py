@@ -12,5 +12,6 @@ urlpatterns = [
     path('display/', views.display, name='display'),
     path('items/', views.items, name='items'),
     path('placeorder/', views.placeorder, name='placeorder'),
+    path('itemsearch', views.itemsearch, name='itemsearch'),
     ]
 

@@ -1,0 +1,16 @@
+{% extends 'myapp/base.html' %}
+
+{% block body_block %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if selected_item %}
+        <h3>Selected Item: {{ selected_item.name }}</h3>
+        <p>Price: ${{ selected_item.price }}</p>
+    {% else %}
+        <p>No item selected</p>
+    {% endif %}
+{%endblock%}

@@ -1,17 +1,43 @@
 {#{% extends "myapp/index.html" %}#}
+{#{% extends 'myapp/base.html' %}#}
+{#{% block body_block %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Online Grocery Store</title>#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'myapp/style.css' %}">#}
+{#</head>#}
+{#<body>#}
+{#{% block bl %}#}
+{#    <h1> About Page</h1>#}
+{#    <a href="http://127.0.0.1:8000/index/">Index - Hardcoded UR</a><br><br>#}
+{#    <a href="http://127.0.0.1:8000/index/">Index - Namespacing URL</a>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{#{% endblock %}#}
 {% extends 'myapp/base.html' %}
-{% block body_block %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Online Grocery Store</title>
+    <title>Online Grocery Store </title>
+    <link rel="stylesheet" type="text/css" href="myapp/style.css">
 </head>
 <body>
-{% block bl %}
-    <a href="http://127.0.0.1:8000/index/">Index - Hardcoded UR</a><br><br>
-    <a href="http://127.0.0.1:8000/index/">Index - Namespacing URL</a>
+{% block body_block %}
+    {% if clientlist %}
+    	<h2>List of Client - </h2>
+        {% for etem in clientlist %}
+        <li>{{ etem.fullname }}</li>
+        {% endfor %}
+    {% else %}
+    	<strong> None of the types is available! </strong> <br>
+    {% endif %} 
+    <br>
+    <p><a href="{% url 'myapp:placeorder' %}">Place Order</a></p>
 {% endblock %}
 </body>
 </html>
-{% endblock %}
