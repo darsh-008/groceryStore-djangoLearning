@@ -18,8 +18,15 @@ from django.urls import include
 
 
 def index(request):
-    type_list = Type.objects.all().order_by('id')[:10]
-    return render(request, 'myapp/index.html', {'type_list': type_list})
+    if 'session_counter' in request.session:
+        request.session['session_counter'] += 1
+    else:
+        request.session['session_counter'] = 1
+
+    response = render(request, 'myapp/index.html')
+    response.set_cookie('counter', value='50', max_age=10)
+
+    return response
 
 # def index(request):
 #     item_list = item.objects.all().order_by('-price')[:10]
@@ -38,8 +45,9 @@ def index(request):
 
 
 def about(request):
-    clientlist = Client.objects.all()
-    return render(request, 'myapp/about.html', context={'clientlist':clientlist})
+    # clientlist = Client.objects.all()
+    form = CityForm()
+    return render(request, 'myapp/about.html', context={ 'form':form})
 
 def detail(request, type_no):
     selected_type = get_object_or_404(Type, pk=type_no)

@@ -27,15 +27,21 @@
     <link rel="stylesheet" type="text/css" href="myapp/style.css">
 </head>
 <body>
+
 {% block body_block %}
-    {% if clientlist %}
-    	<h2>List of Client - </h2>
-        {% for etem in clientlist %}
-        <li>{{ etem.fullname }}</li>
-        {% endfor %}
-    {% else %}
-    	<strong> None of the types is available! </strong> <br>
-    {% endif %} 
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="submit" value="Place Order">
+    </form>
+{#    {% if clientlist %}#}
+{#    	<h2>List of Client - </h2>#}
+{#        {% for etem in clientlist %}#}
+{#        <li>{{ etem.city }}</li>#}
+{#        {% endfor %}#}
+{#    {% else %}#}
+{#    	<strong> None of the types is available! </strong> <br>#}
+{#    {% endif %} #}
     <br>
     <p><a href="{% url 'myapp:placeorder' %}">Place Order</a></p>
 {% endblock %}

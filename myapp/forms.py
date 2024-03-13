@@ -24,3 +24,6 @@ class ClientForm(forms.ModelForm):
 
 class ItemSearchForm(forms.Form):
     items = forms.ModelChoiceField(queryset=item.objects.all(), label='Select Item', empty_label=None)
+
+class CityForm(forms.Form):
+    items = forms.ModelChoiceField(queryset=Client.objects.all(), label='Select Item', empty_label=None)
