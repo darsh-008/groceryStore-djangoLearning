@@ -85,12 +85,35 @@ def display(request):
 
 
 def items(request):
-    itemlists = OrderItem.objects.all().order_by('id')[:20]
+    # itemlists = OrderItem.objects.all().order_by('id')[:20]
+    itemlists = item.objects.all()
     return render(request, 'myapp/items.html', context={'itemlists':itemlists})
 
+# def placeorder(request):
+#     form = OrderItemForm()
+#     return render(request, 'myapp/placeorder.html', context={'form':form})
+
 def placeorder(request):
-    form = OrderItemForm()
-    return render(request, 'myapp/placeorder.html', context={'form':form})
+    msg = ''
+    itemlist = item.objects.all()
+    if request.method == 'POST':
+        form = OrderItemForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            if order.quantity_ordered <= order.item.stock:
+                order.save()
+                msg = 'Your order has been placed successfully.'
+                # Update stock field of the corresponding item
+                order.item.stock -= order.quantity_ordered
+                order.item.save()
+                return render(request, 'myapp/order_response.html', {'msg': msg})
+            else:
+                msg = 'We do not have sufficient stock to fill your order.'
+                return render(request, 'myapp/order_response.html', {'msg': msg})
+    else:
+        form = OrderItemForm()
+    return render(request, 'myapp/placeorder.html', {'form': form, 'msg': msg, 'itemlist': itemlist})
+
 
 def itemsearch(request):
     selected_item = None
@@ -107,3 +130,19 @@ def itemsearch(request):
         form = ItemSearchForm()
 
     return render(request, 'myapp/itemsearch.html', {'form': form, 'selected_item': selected_item, 'price':price})
+
+def itemdetail(request, item_id):
+    i = get_object_or_404(item, pk=item_id)
+    name = item.objects.get(pk=item_id).name
+    price = item.objects.get(pk=item_id).price
+    inter = item.objects.get(pk=item_id).interested
+    form = InterestForm
+    if request.method == 'POST':
+        form = InterestForm(request.POST)
+        if form.is_valid():
+            interested = int(form.cleaned_data['interested'])
+            i.interested += interested
+            i.save()
+        else:
+            form = InterestForm()
+    return render(request, 'myapp/itemdetail.html', {'i': i,'form':form, 'name':name, 'price':price, 'inter':inter })

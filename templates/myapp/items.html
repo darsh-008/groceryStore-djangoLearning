@@ -10,7 +10,7 @@
     {% if itemlists %}
     	<h2>List of Items - </h2>
         {% for etem in itemlists %}
-        <li>{{ etem.item }}</li>
+        <li>{{ etem.name }}</li>
         {% endfor %}
     {% else %}
     	<strong> None of the types is available! </strong> <br>

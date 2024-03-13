@@ -1,0 +1,31 @@
+{% extends 'myapp/base.html' %}
+{% block body_block %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Detail</title>
+</head>
+<body>
+ <h2>Item Detail</h2>
+    {% if i %}
+        <p>Name: {{ name }}</p>
+        <p>Price: ${{ price }}</p>
+        <p>Number of People Interested: {{ inter }}</p>
+        <h2>What about you ?</h2>
+        {% if i.available %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">interested</button>
+            </form>
+        {% else %}
+            <p>This item is not available.</p>
+        {% endif %}
+    {% else %}
+        <p>Item not found.</p>
+    {% endif %}
+
+</body>
+</html>
+{% endblock %}

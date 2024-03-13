@@ -13,5 +13,6 @@ urlpatterns = [
     path('items/', views.items, name='items'),
     path('placeorder/', views.placeorder, name='placeorder'),
     path('itemsearch', views.itemsearch, name='itemsearch'),
+    path('items/<int:item_id>/', views.itemdetail, name='itemdetail')
     ]
 

@@ -1,0 +1,15 @@
+{#{% extends 'myapp/base.html' %}#}
+{#{% block body_block %}#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Response</title>
+</head>
+<body>
+    <h1>Order Response</h1>
+    <p>{{ msg }}</p>
+    <a href="{% url 'myapp:placeorder' %}"> Back </a>
+</body>
+</html>
+{#{%endblock%}#}
