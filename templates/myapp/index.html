@@ -1,7 +1,6 @@
 {% extends 'myapp/base.html' %}
 {% load static %}
 {% block body_block %}
-<body>
 <nav>
     <ul class="nav-links">
         <li><a href="{% url 'myapp:index' %}">Index</a></li>
@@ -14,6 +13,9 @@
 
     <h1>Welcome to My Grocery Store</h1>
     <p>Session Counter: {{ request.session.session_counter }}</p>
+    <p>Cookie count (10 sec): {{ visit_count }}</p>
+    <!-- Logout button -->
+    <a href="{% url 'myapp:logout' %}" class="logout-btn">Logout</a>
     <div>
         <h2>Toothpaste</h2>
         <img src="{% static 'myapp/images/toothpaste.avif' %}" alt="Toothpaste">
@@ -22,5 +24,5 @@
         <h2>Cookies</h2>
         <img src="{% static 'myapp/images/cookies.jpeg' %}" alt="Cookies">
     </div>
-
+    
 {% endblock %}

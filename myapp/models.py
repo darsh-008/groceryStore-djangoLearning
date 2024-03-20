@@ -26,7 +26,7 @@ class item(models.Model):
         return self.stock+50
 
     def __str__(self):
-        return self.name
+        return str(self.price)
 
 
 class Client(User):
@@ -36,10 +36,10 @@ class Client(User):
     city = models.CharField(max_length=2, choices=CITY_CHOICES, default='CH')
     interested_in = models.ManyToManyField(Type)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
+    user_type = models.CharField(max_length=15, default='WD', choices=CITY_CHOICES )
 
     def __str__(self):
         return self.get_city_display()
-
 
 
 class OrderItem(models.Model):

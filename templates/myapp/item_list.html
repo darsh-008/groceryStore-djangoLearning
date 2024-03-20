@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+</head>
+<body>
+    <h1>Item List</h1>
+    <form method="GET">
+        {{ price_range_form.as_p }}
+        <button type="submit">Apply Filter</button>
+    </form>
+    <ul>
+        {% for item in items %}
+            <li>{{ item.name }} - {{ item.price }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

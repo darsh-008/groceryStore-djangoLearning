@@ -1,5 +1,8 @@
 from django import forms
 from myapp.models import *
+from django.contrib.auth.forms import UserCreationForm
+
+
 class OrderItemForm(forms.ModelForm):
     class Meta:
         model = OrderItem
@@ -27,3 +30,12 @@ class ItemSearchForm(forms.Form):
 
 class CityForm(forms.Form):
     items = forms.ModelChoiceField(queryset=Client.objects.all(), label='Select Item', empty_label=None)
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2')
+
+class PriceRangeForm(forms.Form):
+    min_price = forms.DecimalField(label='Min Price', required=False)
+    max_price = forms.DecimalField(label='Max Price', required=False)
